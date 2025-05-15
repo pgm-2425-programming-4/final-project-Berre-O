@@ -1,7 +1,7 @@
 import { StrictMode } from 'react'
 import './App.css'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { Tasks } from './Tasks.jsx'
+import { Tasks } from './Tasks'
 
 const queryClient = new QueryClient()
 
