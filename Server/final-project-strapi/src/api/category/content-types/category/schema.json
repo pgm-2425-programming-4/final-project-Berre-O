@@ -11,7 +11,7 @@
     "draftAndPublish": true
   },
   "attributes": {
-    "Name": {
+    "Title": {
       "type": "string",
       "required": true
     },
