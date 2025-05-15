@@ -1,5 +1,5 @@
 export async function getTasks() {
-    const result = await fetch('http://localhost:1338/api/tasks', {
+    const result = await fetch('http://localhost:1338/api/tasks?populate=*', {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -7,5 +7,5 @@ export async function getTasks() {
     }});
 
         const data = await result.json();
-        return data;
+        return data.data;
 }
