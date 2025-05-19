@@ -21,7 +21,7 @@ export function Tasks() {
             
     const tasks = data.data;
     const totalTasks = data.meta?.pagination?.total || 0;
-    const pageCount = Math.ceil(totalTasks / 4);
+    const pageCount = Math.ceil(totalTasks / pageSize);
     console.log(pageCount)
     console.log(data);
 
