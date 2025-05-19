@@ -1,7 +1,7 @@
 import { KEY, API_URL } from '../constants/constants.js';
 
-export async function getTasks(currentPage) {
-    const result = await fetch(`${API_URL}&pagination[page]=${currentPage}&pagination[pageSize]=4`, {
+export async function getTasks(currentPage, pageSize) {
+    const result = await fetch(`${API_URL}&pagination[page]=${currentPage}&pagination[pageSize]=${pageSize}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',

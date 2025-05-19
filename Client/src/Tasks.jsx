@@ -5,9 +5,10 @@ import { Pagination } from './pagination/Pagination.jsx';
 
 export function Tasks() {
     const [currentPage, setCurrentPage] = useState(1);
+    const [pageSize, setPageSize] = useState(5);
     const { isPending, isError, data, error } = useQuery({ 
-        queryKey: ['tasks', currentPage],
-         queryFn: () => getTasks(currentPage),
+        queryKey: ['tasks', currentPage, pageSize],
+         queryFn: () => getTasks(currentPage, pageSize),
          });
          
          
@@ -28,6 +29,10 @@ export function Tasks() {
     setCurrentPage(pageNumber);
     }
 
+    function handlePageSizeChanged(pageSize) {
+        setPageSize(pageSize);
+    }
+
       return (
         <>
           <div style={{ marginBottom: "2rem" }}>
@@ -40,6 +45,15 @@ export function Tasks() {
             ))}
             </ul>
           </div>
+          <select
+            value={pageSize}
+            onChange={e => {
+            handlePageSizeChanged(Number(e.target.value));
+            }}
+            >
+            <option key="5" value="5">5 Items</option>
+            <option key="10" value="10">10 Items</option>
+          </select>
           <Pagination
             currentPage={currentPage}
             pageCount={pageCount}
