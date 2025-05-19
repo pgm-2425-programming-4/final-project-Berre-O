@@ -1,0 +1,23 @@
+{
+  "kind": "collectionType",
+  "collectionName": "task_statuses",
+  "info": {
+    "singularName": "task-status",
+    "pluralName": "task-statuses",
+    "displayName": "TaskStatus"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "CurrentStatus": {
+      "type": "string"
+    },
+    "tasks": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::task.task",
+      "mappedBy": "task_status"
+    }
+  }
+}

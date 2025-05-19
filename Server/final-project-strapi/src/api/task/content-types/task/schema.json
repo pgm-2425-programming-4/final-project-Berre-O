@@ -20,6 +20,12 @@
       "relation": "manyToOne",
       "target": "api::category.category",
       "inversedBy": "tasks"
+    },
+    "task_status": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::task-status.task-status",
+      "inversedBy": "tasks"
     }
   }
 }
