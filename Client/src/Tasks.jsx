@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { getTasks } from './queries/getTasks.jsx';
+import { getTasks } from './queries/getBacklog.jsx';
 import { useState } from 'react';
 import { Pagination } from './pagination/Pagination.jsx';
 
@@ -48,7 +48,8 @@ export function Tasks() {
           <select
             value={pageSize}
             onChange={e => {
-            handlePageSizeChanged(Number(e.target.value));
+            handlePageSizeChanged(Number(e.target.value)),
+            setCurrentPage(1);
             }}
             >
             <option key="5" value="5">5 Items</option>
