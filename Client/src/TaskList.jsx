@@ -16,12 +16,40 @@ export function TaskList() {
 
     const tasks = data?.data || [];
 
+    
     return (
         <>
             <div style={{ marginBottom: "2rem" }}>
+                <h2>UnCompleted</h2>
                 <ul>
                     {tasks
                         .filter(task => task.task_status.CurrentStatus === "Uncomplete")
+                        .map(task => (
+                            <li key={task.id}>
+                                <h2>{task.Title}</h2>
+                                <p>{task.category.Title}</p>
+                            </li>
+                        ))}
+                </ul>
+            </div>
+            <div style={{ marginBottom: "2rem" }}>
+                <h2>In Progress</h2>
+                <ul>
+                    {tasks
+                        .filter(task => task.task_status.CurrentStatus === "Progress")
+                        .map(task => (
+                            <li key={task.id}>
+                                <h2>{task.Title}</h2>
+                                <p>{task.category.Title}</p>
+                            </li>
+                        ))}
+                </ul>
+            </div>
+            <div style={{ marginBottom: "2rem" }}>
+                <h2>UnCompleted</h2>
+                <ul>
+                    {tasks
+                        .filter(task => task.task_status.CurrentStatus === "Complete")
                         .map(task => (
                             <li key={task.id}>
                                 <h2>{task.Title}</h2>
