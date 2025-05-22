@@ -1,2 +1,4 @@
-export const API_URL = "http://localhost:1338/api/";
+export const API_URL = import.meta.env.PROD
+?"https://final-project-berre-o.onrender.com/api/"
+: "http://localhost:1338/api/";
 export const KEY = "d46266a8b444c2529c55646e60c8de10062807023793525b234ba5b6657a2f247d0f7056aa68439aa092bd225f821618f10b0fdacdf4e6deac7cc477c232af27688e3c4f54d4ff35059878e0285a1d33e84bdb8a67e95a45f7823269b0680b4c3bdfa2f1ec645e693c2424b98ea304596b24a2cc96e929b0f5420a2ffc190748";
