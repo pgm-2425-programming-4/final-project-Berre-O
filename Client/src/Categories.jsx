@@ -31,7 +31,7 @@ export function Categories() {
                     {categories.map(category => (
                         <li
                             key={category.id}
-                            onClick={() => setCurrentCategory(category.id)}
+                            onClick={() => setCurrentCategory(category.documentId)}
                         >
                             <h2>{category.Title}</h2>
                         </li>

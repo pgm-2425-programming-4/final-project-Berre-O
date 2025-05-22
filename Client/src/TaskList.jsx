@@ -19,7 +19,6 @@ const { isPending, isError, data, error } = useQuery({
         const category = data?.data
         const categoryTasks = category.tasks;
 
-        console.log(categoryTasks);
     
     return (
         <>
