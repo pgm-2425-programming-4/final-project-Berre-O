@@ -2,11 +2,12 @@ import { useQuery } from '@tanstack/react-query';
 import { getCurrentCategory } from './queries/getCurrentCategory.jsx';
 
 export function TaskList({ currentCategory }) {
-    console.log(currentCategory);
-    const { isPending, isError, data, error } = useQuery({ 
-        queryKey: ['tasks', currentCategory],
-        queryFn: getCurrentCategory(currentCategory),
-    });
+
+const { isPending, isError, data, error } = useQuery({ 
+    queryKey: ['category', currentCategory],
+    queryFn: () => getCurrentCategory(currentCategory),
+    enabled: !!currentCategory,
+});
 
     if (isPending) {
         return <span>Loading...</span>;
@@ -17,6 +18,8 @@ export function TaskList({ currentCategory }) {
 
         const category = data?.data
         const categoryTasks = category.tasks;
+
+        console.log(categoryTasks);
     
     return (
         <>

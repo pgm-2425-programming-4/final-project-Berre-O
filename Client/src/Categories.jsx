@@ -20,9 +20,8 @@ export function Categories() {
 
     const categories = data?.data || [];
 
-    console.log(categories);
 
-    const selectedCategoryId = currentCategory ?? categories[0]?.id;
+    const selectedCategoryId = currentCategory ?? categories[0]?.documentId;
 
     return (
         <>

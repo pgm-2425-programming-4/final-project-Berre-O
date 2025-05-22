@@ -1,7 +1,6 @@
 import { KEY, API_URL } from '../constants/constants.js';
 
 export async function getCurrentCategory(currentCategory) {
-
     const settings = {
         method: 'GET',
         headers: {
@@ -9,7 +8,7 @@ export async function getCurrentCategory(currentCategory) {
             'Authorization': 'Bearer ' + `${KEY}`
     }};
 
-    const result = await fetch(`${API_URL}categories/${Number(currentCategory)}?populate[tasks][populate]=*`, settings);
+    const result = await fetch(`${API_URL}categories/${currentCategory}?populate[tasks][populate]=*`, settings);
         const data = await result.json();
 
         return data;
