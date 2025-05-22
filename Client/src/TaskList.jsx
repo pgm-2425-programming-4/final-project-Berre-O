@@ -1,11 +1,13 @@
 import { useQuery } from '@tanstack/react-query';
-import { getTasks } from './queries/getTasks.jsx';
+import { getCurrentCategory } from './queries/getCurrentCategory.jsx';
 
-export function TaskList() {
-    const { isPending, isError, data, error } = useQuery({ 
-        queryKey: ['tasks'],
-        queryFn: getTasks,
-    });
+export function TaskList({ currentCategory }) {
+
+const { isPending, isError, data, error } = useQuery({ 
+    queryKey: ['category', currentCategory],
+    queryFn: () => getCurrentCategory(currentCategory),
+    enabled: !!currentCategory,
+});
 
     if (isPending) {
         return <span>Loading...</span>;
@@ -14,7 +16,8 @@ export function TaskList() {
         return <span>Error: {error.message}</span>;
     }
 
-    const tasks = data?.data || [];
+        const category = data?.data
+        const categoryTasks = category.tasks;
 
     
     return (
@@ -22,7 +25,7 @@ export function TaskList() {
             <div style={{ marginBottom: "2rem" }}>
                 <h2>UnCompleted</h2>
                 <ul>
-                    {tasks
+                    {categoryTasks
                         .filter(task => task.task_status.CurrentStatus === "Uncomplete")
                         .map(task => (
                             <li key={task.id}>
@@ -35,7 +38,7 @@ export function TaskList() {
             <div style={{ marginBottom: "2rem" }}>
                 <h2>In Progress</h2>
                 <ul>
-                    {tasks
+                    {categoryTasks
                         .filter(task => task.task_status.CurrentStatus === "Progress")
                         .map(task => (
                             <li key={task.id}>
@@ -48,7 +51,7 @@ export function TaskList() {
             <div style={{ marginBottom: "2rem" }}>
                 <h2>UnCompleted</h2>
                 <ul>
-                    {tasks
+                    {categoryTasks
                         .filter(task => task.task_status.CurrentStatus === "Complete")
                         .map(task => (
                             <li key={task.id}>

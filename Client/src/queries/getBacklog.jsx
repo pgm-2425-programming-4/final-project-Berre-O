@@ -8,7 +8,7 @@ export async function getTasks(currentPage, pageSize) {
             'Authorization': 'Bearer ' + `${KEY}`
     }};
 
-    const result = await fetch(`${API_URL}&pagination[page]=${currentPage}&pagination[pageSize]=${pageSize}&filters[task_status][CurrentStatus]=Backlog`, settings);
+    const result = await fetch(`${API_URL}tasks?populate=*&pagination[page]=${currentPage}&pagination[pageSize]=${pageSize}&filters[task_status][CurrentStatus]=Backlog`, settings);
         const data = await result.json();
         return data;
 }
