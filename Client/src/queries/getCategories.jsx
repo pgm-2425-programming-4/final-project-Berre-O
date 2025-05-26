@@ -1,6 +1,6 @@
 import { KEY, API_URL } from '../constants/constants.js';
 
-export async function getTasks(currentPage, pageSize) {
+export async function getCategories() {
     const settings = {
         method: 'GET',
         headers: {
@@ -8,7 +8,8 @@ export async function getTasks(currentPage, pageSize) {
             'Authorization': 'Bearer ' + `${KEY}`
     }};
 
-    const result = await fetch(`${API_URL}tasks?populate=*&pagination[page]=${currentPage}&pagination[pageSize]=${pageSize}&filters[task_status][CurrentStatus]=Backlog`, settings);
+    const result = await fetch(`${API_URL}categories`, settings);
         const data = await result.json();
+
         return data;
 }
