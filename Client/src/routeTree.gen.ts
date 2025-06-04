@@ -13,6 +13,7 @@
 import { Route as rootRoute } from './routes/__root'
 import { Route as IndexImport } from './routes/index'
 import { Route as BacklogIndexImport } from './routes/backlog/index'
+import { Route as CategoriesCategoryTitleImport } from './routes/categories/$categoryTitle'
 
 // Create/Update Routes
 
@@ -28,6 +29,12 @@ const BacklogIndexRoute = BacklogIndexImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
+const CategoriesCategoryTitleRoute = CategoriesCategoryTitleImport.update({
+  id: '/categories/$categoryTitle',
+  path: '/categories/$categoryTitle',
+  getParentRoute: () => rootRoute,
+} as any)
+
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
@@ -37,6 +44,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/categories/$categoryTitle': {
+      id: '/categories/$categoryTitle'
+      path: '/categories/$categoryTitle'
+      fullPath: '/categories/$categoryTitle'
+      preLoaderRoute: typeof CategoriesCategoryTitleImport
       parentRoute: typeof rootRoute
     }
     '/backlog/': {
@@ -53,36 +67,41 @@ declare module '@tanstack/react-router' {
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/categories/$categoryTitle': typeof CategoriesCategoryTitleRoute
   '/backlog': typeof BacklogIndexRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/categories/$categoryTitle': typeof CategoriesCategoryTitleRoute
   '/backlog': typeof BacklogIndexRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
+  '/categories/$categoryTitle': typeof CategoriesCategoryTitleRoute
   '/backlog/': typeof BacklogIndexRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/backlog'
+  fullPaths: '/' | '/categories/$categoryTitle' | '/backlog'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/backlog'
-  id: '__root__' | '/' | '/backlog/'
+  to: '/' | '/categories/$categoryTitle' | '/backlog'
+  id: '__root__' | '/' | '/categories/$categoryTitle' | '/backlog/'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CategoriesCategoryTitleRoute: typeof CategoriesCategoryTitleRoute
   BacklogIndexRoute: typeof BacklogIndexRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CategoriesCategoryTitleRoute: CategoriesCategoryTitleRoute,
   BacklogIndexRoute: BacklogIndexRoute,
 }
 
@@ -97,11 +116,15 @@ export const routeTree = rootRoute
       "filePath": "__root.jsx",
       "children": [
         "/",
+        "/categories/$categoryTitle",
         "/backlog/"
       ]
     },
     "/": {
       "filePath": "index.jsx"
+    },
+    "/categories/$categoryTitle": {
+      "filePath": "categories/$categoryTitle.jsx"
     },
     "/backlog/": {
       "filePath": "backlog/index.jsx"
