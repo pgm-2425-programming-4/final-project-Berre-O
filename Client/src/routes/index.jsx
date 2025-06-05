@@ -1,5 +1,4 @@
 import { createFileRoute, Link, Outlet } from '@tanstack/react-router'
-import { TaskList } from '../TaskList.jsx';
 
 export const Route = createFileRoute('/')({
   component: Index,
