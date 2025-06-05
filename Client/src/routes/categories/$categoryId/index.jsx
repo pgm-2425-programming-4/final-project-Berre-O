@@ -14,13 +14,13 @@ export const Route = createFileRoute("/categories/$categoryId/")({
 
 function TaskSection({ title, tasks }) {
   return (
-    <div style={{ marginBottom: "2rem" }}>
-      <h2>{title}</h2>
-      <ul>
+    <div className="card-group">
+      <h2 className="card-group__title">{title}</h2>
+      <ul className="list">
         {tasks.map((task) => (
-          <li key={task.id}>
-            <h2>{task.Title}</h2>
-            <p>{task.category.Title}</p>
+          <li key={task.id} className="list__item list__item--bordered">
+            <h2 className="list__item-title">{task.Title}</h2>
+            <p className="list__description">{task.category.Title}</p>
           </li>
         ))}
       </ul>
@@ -59,21 +59,24 @@ function RouteComponent() {
 
   return (
     <>
-      <div>
-        <h2>
-          <Link
-            to="/categories/$categoryId/backlog"
-            params={{ categoryId: documentId }}
-          >
-            Backlog
-          </Link>
-        </h2>
-      </div>
+      <header className="header">
+        <div className="header__btns">
+          <h2 className="btn header__btn">
+            <Link
+              to="/categories/$categoryId/backlog"
+              params={{ categoryId: documentId }}
+            >
+              Backlog
+            </Link>
+          </h2>
+          <button onClick={openForm} className="btn header__btn">
+            + Add task
+          </button>
+        </div>
+      </header>
 
-      <button onClick={openForm}>Open</button>
-
-      <dialog ref={dialogRef} onClose={closeForm}>
-        <button onClick={closeForm}>Close</button>
+      <dialog ref={dialogRef} onClose={closeForm} className="dialog">
+        <button onClick={closeForm} className="btn btn--destructive">Close</button>
         <Form
           categoryId={documentId}
           categoryTitle={Title}
@@ -81,6 +84,8 @@ function RouteComponent() {
         />
       </dialog>
 
+
+          <section className="container">
       {Object.entries(statusMap).map(([statusKey, label]) => (
         <TaskSection
           key={statusKey}
@@ -88,6 +93,7 @@ function RouteComponent() {
           tasks={groupedTasks[statusKey] || []}
         />
       ))}
+      </section>
     </>
   );
 }

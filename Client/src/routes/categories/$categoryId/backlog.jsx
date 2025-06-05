@@ -38,36 +38,39 @@ function Index() {
 
   return (
     <>
-      <div style={{ marginBottom: "2rem" }}>
-        <ul>
+      <section className="container container--list">
+        <ul className="list">
           {tasks.map((task) => (
-            <li key={task.id}>
-              <h2>{task.Title}</h2>
-              <p>{task.category.Title}</p>
+            <li key={task.id} className="list__item">
+              <h2 className="list__item-title">{task.Title}</h2>
+              <p className="list__description">{task.category.Title}</p>
             </li>
           ))}
         </ul>
-      </div>
-      <select
-        value={pageSize}
-        onChange={(e) => {
-          const newSize = Number(e.target.value);
-          handlePageSizeChanged(newSize);
-          setCurrentPage(1);
-        }}
-      >
-        <option key="5" value="5">
-          5 Items
-        </option>
-        <option key="10" value="10">
-          10 Items
-        </option>
-      </select>
-      <Pagination
-        currentPage={currentPage}
-        pageCount={pageCount}
-        onPageChanged={handlePageChanged}
-      />
+      </section>
+      <section className="pagination-container">
+        <select
+          value={pageSize}
+          onChange={(e) => {
+            const newSize = Number(e.target.value);
+            handlePageSizeChanged(newSize);
+            setCurrentPage(1);
+          }}
+          className="dropdown"
+        >
+          <option key="5" value="5" className="dropdown__option">
+            5 Items
+          </option>
+          <option key="10" value="10" className="dropdown__option">
+            10 Items
+          </option>
+        </select>
+        <Pagination
+          currentPage={currentPage}
+          pageCount={pageCount}
+          onPageChanged={handlePageChanged}
+        />
+      </section>
     </>
   );
 }

@@ -17,26 +17,30 @@ function RootLayout() {
 
   return (
     <>
-      <div className="p-2 flex gap-2">
-        <Link to="/">Home</Link>
-      </div>
-      <div>
-        <ul>
+      <aside className="aside">
+        <nav className="nav">
+          <Link to="/">
+            <p className="nav__item">Home</p>
+          </Link>
+        </nav>
+        <ul className="list">
+          <h2 className="list__title">Projects</h2>
           {categories.map((category) => (
-            <li key={category.documentId}>
+            <li key={category.documentId} className="list__item">
               <Link
                 to="/categories/$categoryId"
                 params={{ categoryId: category.documentId }}
               >
-                <h2>{category.Title}</h2>
+                <h3 className="list__item-title">{category.Title}</h3>
               </Link>
             </li>
           ))}
         </ul>
-      </div>
-      <hr />
-      <Outlet />
-      <TanStackRouterDevtools />
+      </aside>
+      <main className="main">
+        <Outlet />
+        <TanStackRouterDevtools />
+      </main>
     </>
   );
 }
