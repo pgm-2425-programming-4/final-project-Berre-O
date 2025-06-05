@@ -1,5 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { getCurrentCategory } from "../../../queries/getCurrentCategory.jsx";
+import Form from "../../../components/Form.jsx";
+import { useRef } from "react";
 
 export const Route = createFileRoute("/categories/$categoryId/")({
   loader: async ({ params }) => {
@@ -7,12 +9,22 @@ export const Route = createFileRoute("/categories/$categoryId/")({
     return data.data;
   },
   component: RouteComponent,
-  notFoundComponent: () => <div>Student not found</div>,
+  notFoundComponent: () => <div>Category not found</div>,
 });
 
 function RouteComponent() {
   const categoryTasks = Route.useLoaderData().tasks;
   const category = Route.useLoaderData();
+
+  const dialogRef = useRef(null);
+
+  function openForm() {
+    dialogRef.current?.showModal();
+  }
+
+  function closeForm() {
+    dialogRef.current?.close();
+  }
 
   return (
     <>
@@ -27,6 +39,16 @@ function RouteComponent() {
         </h2>
       </div>
 
+      <button onClick={openForm}>Open</button>
+
+      <dialog ref={dialogRef}>
+        <button onClick={closeForm}>Close</button>
+        <Form 
+          categoryId={category.documentId}
+          categoryTitle={category.Title}
+        />
+      </dialog>
+
       <div style={{ marginBottom: "2rem" }}>
         <h2>UnCompleted</h2>
         <ul>
@@ -40,6 +62,7 @@ function RouteComponent() {
             ))}
         </ul>
       </div>
+
       <div style={{ marginBottom: "2rem" }}>
         <h2>In Progress</h2>
         <ul>
@@ -53,8 +76,9 @@ function RouteComponent() {
             ))}
         </ul>
       </div>
+
       <div style={{ marginBottom: "2rem" }}>
-        <h2>UnCompleted</h2>
+        <h2>Completed</h2>
         <ul>
           {categoryTasks
             .filter((task) => task.task_status.CurrentStatus === "Complete")
