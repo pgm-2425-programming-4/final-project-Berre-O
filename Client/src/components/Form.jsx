@@ -1,13 +1,16 @@
+import { useRouter } from "@tanstack/react-router";
 import React, { useState } from "react";
 import { getCategories } from "../queries/getCategories.jsx";
 import { useQuery } from "@tanstack/react-query";
 import { getTags } from "../queries/getTags.jsx";
 import { getStates } from "../queries/getStates.jsx";
-import { postTask } from "../queries/postTask.jsx"
+import { postTask } from "../queries/postTask.jsx";
 
-function LoadForm({categoryTitle, closeForm}) {
+function LoadForm({ categoryId, closeForm }) {
+  const router = useRouter();
+
   const [taskTitle, setTaskTitle] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState(categoryTitle);
+  const [selectedCategory, setSelectedCategory] = useState(categoryId);
   const [selectedState, setSelectedState] = useState("");
   const [selectedTags, setSelectedTags] = useState([]);
 
@@ -57,6 +60,7 @@ function LoadForm({categoryTitle, closeForm}) {
   const categories = categoriesData.data || [];
   const tags = tagsData?.data || tagsData || [];
   const states = statusData?.data || statusData || [];
+  console.log(states)
 
   const handleTagChange = (e) => {
     const tagId = e.target.value;
@@ -65,24 +69,29 @@ function LoadForm({categoryTitle, closeForm}) {
     );
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const data = {
       data: {
-      Title: taskTitle,
-      category: selectedCategory,
-      task_status: selectedState,
-      tags: selectedTags,
-      }
+        Title: taskTitle,
+        category: selectedCategory,
+        task_status: selectedState,
+        tags: selectedTags,
+      },
     };
-    postTask(data);
 
-  setTaskTitle("");
-  setSelectedCategory("");
-  setSelectedState("");
-  setSelectedTags([]);
+    try {
+      await postTask(data);
+      await router.invalidate();
 
-  closeForm();
+      setTaskTitle("");
+      setSelectedCategory("");
+      setSelectedState("");
+      setSelectedTags([]);
+      closeForm();
+    } catch (error) {
+      console.error("Failed to post task:", error);
+    }
   };
 
   return (
@@ -116,6 +125,7 @@ function LoadForm({categoryTitle, closeForm}) {
           value={selectedState}
           onChange={(e) => setSelectedState(e.target.value)}
         >
+          <option value="">--Select a state</option>
           {states.map((state) => (
             <option key={state.documentId} value={state.documentId}>
               {state.CurrentStatus}
@@ -125,13 +135,13 @@ function LoadForm({categoryTitle, closeForm}) {
 
         {tags.map((tag) => (
           <label key={tag.documentId}>
-            {tag.Title}
             <input
               type="checkbox"
               value={tag.documentId}
               checked={selectedTags.includes(tag.documentId)}
               onChange={handleTagChange}
-            ></input>
+              ></input>
+              {tag.Title}
           </label>
         ))}
 

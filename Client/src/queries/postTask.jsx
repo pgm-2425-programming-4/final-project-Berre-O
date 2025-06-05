@@ -1,6 +1,7 @@
 import { KEY, API_URL } from "../constants/constants.js";
 
 export async function postTask(postData) {
+    console.log(postData)
   const settings = {
     method: "POST",
     headers: {
