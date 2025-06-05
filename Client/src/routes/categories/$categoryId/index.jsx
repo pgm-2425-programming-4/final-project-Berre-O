@@ -13,8 +13,16 @@ export const Route = createFileRoute("/categories/$categoryId/")({
 });
 
 function TaskSection({ title, tasks }) {
+  let modifier = "";
+  if(title === "To Do") {
+    modifier = "background-container--blue";
+  } else if(title === "Completed") {
+    modifier = "background-container--green";
+  }
+
   return (
-    <div className="card-group">
+    <div className={`card-group`}>
+      <div className={`background-container ${modifier}`}></div>
       <h2 className="card-group__title">{title}</h2>
       <ul className="list list--task">
         {tasks.map((task) => (
@@ -45,7 +53,7 @@ function RouteComponent() {
   const openForm = () => setShowForm(true);
 
   const statusMap = {
-    Uncomplete: "UnCompleted",
+    Uncomplete: "To Do",
     Progress: "In Progress",
     Complete: "Completed",
   };

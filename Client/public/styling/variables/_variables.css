@@ -44,4 +44,9 @@
   --spacing-2xl: 64px;
   --spacing-3xl: 128px;
   --spacing-4xl: 256px;
+
+  /* distinction */
+  --background-color-red: var(--color-btn-destructive);
+  --background-color-blue: var(--color-btn-background-hover);
+  --background-color-green: #22c55e;
 }

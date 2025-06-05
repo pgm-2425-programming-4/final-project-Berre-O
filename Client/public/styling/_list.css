@@ -17,11 +17,31 @@
   }
 
   .list__item-title {
-    color: var(--color-text-secondary);
+    color: inherit;
+  }
+
+  .list__item--category {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+
+    svg {
+      stroke: var(--color-text-secondary);
+    }
+  }
+
+  .list__item--active {
+    color: var(--color-btn-background);
+    
+    svg {
+      stroke: var(--color-btn-background);
+    }
   }
 }
 
 .list--task {
   height: 100%;
   overflow-y: scroll;
+  padding-left: var(--spacing-sm);
+  padding-right: var(--spacing-sm);
 }
