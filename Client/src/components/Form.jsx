@@ -60,7 +60,6 @@ function LoadForm({ categoryId, closeForm }) {
   const categories = categoriesData.data || [];
   const tags = tagsData?.data || tagsData || [];
   const states = statusData?.data || statusData || [];
-  console.log(states)
 
   const handleTagChange = (e) => {
     const tagId = e.target.value;
