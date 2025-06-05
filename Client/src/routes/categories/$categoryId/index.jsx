@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { getCurrentCategory } from "../../../queries/getCurrentCategory.jsx";
 import Form from "../../../components/Form.jsx";
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 
 export const Route = createFileRoute("/categories/$categoryId/")({
   loader: async ({ params }) => {
@@ -12,27 +12,58 @@ export const Route = createFileRoute("/categories/$categoryId/")({
   notFoundComponent: () => <div>Category not found</div>,
 });
 
+function TaskSection({ title, tasks }) {
+  return (
+    <div style={{ marginBottom: "2rem" }}>
+      <h2>{title}</h2>
+      <ul>
+        {tasks.map((task) => (
+          <li key={task.id}>
+            <h2>{task.Title}</h2>
+            <p>{task.category.Title}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
 function RouteComponent() {
-  const categoryTasks = Route.useLoaderData().tasks;
-  const category = Route.useLoaderData();
-
+  const { tasks = [], documentId, Title } = Route.useLoaderData();
   const dialogRef = useRef(null);
+  const [showForm, setShowForm] = useState(false);
 
-  function openForm() {
-    dialogRef.current?.showModal();
-  }
+  useEffect(() => {
+    if (showForm) {
+      dialogRef.current?.showModal();
+    } else {
+      dialogRef.current?.close();
+    }
+  }, [showForm]);
 
-  function closeForm() {
-    dialogRef.current?.close();
-  }
+  const closeForm = () => setShowForm(false);
+  const openForm = () => setShowForm(true);
+
+  const statusMap = {
+    Uncomplete: "UnCompleted",
+    Progress: "In Progress",
+    Complete: "Completed",
+  };
+
+  const groupedTasks = tasks.reduce((acc, task) => {
+    const status = task.task_status.CurrentStatus;
+    if (!acc[status]) acc[status] = [];
+    acc[status].push(task);
+    return acc;
+  }, {});
 
   return (
     <>
       <div>
-        <h2 key={category.documentId}>
+        <h2>
           <Link
             to="/categories/$categoryId/backlog"
-            params={{ categoryId: category.documentId }}
+            params={{ categoryId: documentId }}
           >
             Backlog
           </Link>
@@ -41,56 +72,22 @@ function RouteComponent() {
 
       <button onClick={openForm}>Open</button>
 
-      <dialog ref={dialogRef}>
+      <dialog ref={dialogRef} onClose={closeForm}>
         <button onClick={closeForm}>Close</button>
-        <Form 
-          categoryId={category.documentId}
-          categoryTitle={category.Title}
-          closeForm= {closeForm}
+        <Form
+          categoryId={documentId}
+          categoryTitle={Title}
+          closeForm={closeForm}
         />
       </dialog>
 
-      <div style={{ marginBottom: "2rem" }}>
-        <h2>UnCompleted</h2>
-        <ul>
-          {categoryTasks
-            .filter((task) => task.task_status.CurrentStatus === "Uncomplete")
-            .map((task) => (
-              <li key={task.id}>
-                <h2>{task.Title}</h2>
-                <p>{task.category.Title}</p>
-              </li>
-            ))}
-        </ul>
-      </div>
-
-      <div style={{ marginBottom: "2rem" }}>
-        <h2>In Progress</h2>
-        <ul>
-          {categoryTasks
-            .filter((task) => task.task_status.CurrentStatus === "Progress")
-            .map((task) => (
-              <li key={task.id}>
-                <h2>{task.Title}</h2>
-                <p>{task.category.Title}</p>
-              </li>
-            ))}
-        </ul>
-      </div>
-
-      <div style={{ marginBottom: "2rem" }}>
-        <h2>Completed</h2>
-        <ul>
-          {categoryTasks
-            .filter((task) => task.task_status.CurrentStatus === "Complete")
-            .map((task) => (
-              <li key={task.id}>
-                <h2>{task.Title}</h2>
-                <p>{task.category.Title}</p>
-              </li>
-            ))}
-        </ul>
-      </div>
+      {Object.entries(statusMap).map(([statusKey, label]) => (
+        <TaskSection
+          key={statusKey}
+          title={label}
+          tasks={groupedTasks[statusKey] || []}
+        />
+      ))}
     </>
   );
 }
