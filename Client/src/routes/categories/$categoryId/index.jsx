@@ -46,6 +46,7 @@ function RouteComponent() {
         <Form 
           categoryId={category.documentId}
           categoryTitle={category.Title}
+          closeForm= {closeForm}
         />
       </dialog>
 
