@@ -1,0 +1,46 @@
+:root {
+  /* Typography */
+  --font-family: 'Inter', sans-serif;
+  --font-weight-normal: 400;
+  --font-weight-bold: 600;
+
+  /* Colors */
+  --color-text-primary: #1e1e1e;
+  --color-text-secondary: #555;
+  --color-heading: #1a1a1a;
+  --color-background: #f9fafc;
+  --color-sidebar: #ffffff;
+  --color-border: #e2e8f0;
+
+  /* Button + Link */
+  --color-btn-background: #3b82f6;
+  --color-btn-background-hover: #2563eb;
+  --color-btn-foreground: var(--color-background);
+
+  /* Column Borders */
+  --color-column-border: #d1d5db;
+
+  /* Tag Colors */
+  --color-tag-background: var(--color-heading);
+  --color-tag-foreground: var(--color-background);
+
+  /* Border Radius */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-color: rgba(0, 0, 0, 0.1);
+
+  /* Spacing */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --spacing-2xl: 64px;
+  --spacing-3xl: 128px;
+  --spacing-4xl: 256px;
+}

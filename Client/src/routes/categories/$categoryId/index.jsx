@@ -76,7 +76,9 @@ function RouteComponent() {
       </header>
 
       <dialog ref={dialogRef} onClose={closeForm} className="dialog">
-        <button onClick={closeForm} className="btn btn--destructive">Close</button>
+        <button onClick={closeForm} className="btn btn--destructive">
+          Close
+        </button>
         <Form
           categoryId={documentId}
           categoryTitle={Title}
@@ -84,15 +86,14 @@ function RouteComponent() {
         />
       </dialog>
 
-
-          <section className="container">
-      {Object.entries(statusMap).map(([statusKey, label]) => (
-        <TaskSection
-          key={statusKey}
-          title={label}
-          tasks={groupedTasks[statusKey] || []}
-        />
-      ))}
+      <section className="container">
+        {Object.entries(statusMap).map(([statusKey, label]) => (
+          <TaskSection
+            key={statusKey}
+            title={label}
+            tasks={groupedTasks[statusKey] || []}
+          />
+        ))}
       </section>
     </>
   );

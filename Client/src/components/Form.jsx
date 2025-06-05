@@ -139,8 +139,8 @@ function LoadForm({ categoryId, closeForm }) {
               value={tag.documentId}
               checked={selectedTags.includes(tag.documentId)}
               onChange={handleTagChange}
-              ></input>
-              {tag.Title}
+            ></input>
+            {tag.Title}
           </label>
         ))}
 

@@ -1,0 +1,15 @@
+.list {
+    display: flex;
+    flex-direction: column;
+
+    gap: var(--spacing-lg);
+
+    .list__title {
+        font-size: var(--spacing-lg);
+    }
+
+    .list__item {
+        padding-left: var(--spacing-md);
+    }
+
+}

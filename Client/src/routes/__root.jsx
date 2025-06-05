@@ -18,11 +18,11 @@ function RootLayout() {
   return (
     <>
       <aside className="aside">
-        <nav className="nav">
+        <div className="aside__logo">
           <Link to="/">
-            <p className="nav__item">Home</p>
+            <p className="aside__title">Project manager</p>
           </Link>
-        </nav>
+        </div>
         <ul className="list">
           <h2 className="list__title">Projects</h2>
           {categories.map((category) => (

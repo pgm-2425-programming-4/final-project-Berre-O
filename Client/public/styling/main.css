@@ -1,0 +1,28 @@
+@import url("_reset.css");
+@import url("./variables/_variables.css");
+@import url("_btn.css");
+@import url("./_main.css");
+@import url("./_aside.css");
+@import url("./_list.css");
+
+* {
+  font-family: var(--font-family);
+}
+
+ul {
+  font-family: var(--font-family);
+  list-style-type: none;
+  padding-left: 0;
+}
+
+a {
+  font-family: var(--font-family);
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+    background-color: inherit;
+    border: none;
+    padding: 0;
+}
