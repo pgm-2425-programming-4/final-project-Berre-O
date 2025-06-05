@@ -1,6 +1,6 @@
 :root {
   /* Typography */
-  --font-family: 'Inter', sans-serif;
+  --font-family: "Nunito", sans-serif;
   --font-weight-normal: 400;
   --font-weight-bold: 600;
 
@@ -16,6 +16,7 @@
   --color-btn-background: #3b82f6;
   --color-btn-background-hover: #2563eb;
   --color-btn-foreground: var(--color-background);
+  --color-btn-destructive: #ef4444;
 
   /* Column Borders */
   --color-column-border: #d1d5db;

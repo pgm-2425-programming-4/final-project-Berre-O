@@ -4,9 +4,13 @@
 @import url("./_main.css");
 @import url("./_aside.css");
 @import url("./_list.css");
+@import url("./_header.css");
+@import url("./_card-group.css");
+@import url("./_task.css");
 
 * {
   font-family: var(--font-family);
+  color: var(--color-text-primary);
 }
 
 ul {

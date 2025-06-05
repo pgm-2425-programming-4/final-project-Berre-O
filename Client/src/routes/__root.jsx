@@ -24,7 +24,7 @@ function RootLayout() {
           </Link>
         </div>
         <ul className="list">
-          <h2 className="list__title">Projects</h2>
+          <h2 className="list__title">Active Projects</h2>
           {categories.map((category) => (
             <li key={category.documentId} className="list__item">
               <Link

@@ -16,11 +16,11 @@ function TaskSection({ title, tasks }) {
   return (
     <div className="card-group">
       <h2 className="card-group__title">{title}</h2>
-      <ul className="list">
+      <ul className="list list--task">
         {tasks.map((task) => (
-          <li key={task.id} className="list__item list__item--bordered">
-            <h2 className="list__item-title">{task.Title}</h2>
-            <p className="list__description">{task.category.Title}</p>
+          <li key={task.id} className="task">
+            <h2 className="task__title">{task.Title}</h2>
+            <p className="task__description">{task.category.Title}</p>
           </li>
         ))}
       </ul>
@@ -60,7 +60,11 @@ function RouteComponent() {
   return (
     <>
       <header className="header">
+        <h1 className="header__title">Project Dashboard</h1>
         <div className="header__btns">
+          <button onClick={openForm} className="btn header__btn">
+            + Add task
+          </button>
           <h2 className="btn header__btn">
             <Link
               to="/categories/$categoryId/backlog"
@@ -69,9 +73,6 @@ function RouteComponent() {
               Backlog
             </Link>
           </h2>
-          <button onClick={openForm} className="btn header__btn">
-            + Add task
-          </button>
         </div>
       </header>
 

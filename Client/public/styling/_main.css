@@ -7,4 +7,11 @@
 .main {
     background-color: var(--color-background);
     width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.container {
+    display: flex;
+    justify-content: space-evenly;
 }

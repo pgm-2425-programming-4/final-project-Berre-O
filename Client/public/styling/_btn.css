@@ -4,5 +4,15 @@
     border-radius: var(--radius-md);
     width: fit-content;
     padding: var(--spacing-sm);
+    padding-left: var(--spacing-md);
+    padding-right: var(--spacing-md);
     cursor: pointer;
+    font-size: var(--spacing-md);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn--destructive {
+    background-color: var(--color-btn-destructive);
 }
