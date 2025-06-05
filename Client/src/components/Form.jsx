@@ -1,29 +1,88 @@
 import React, { useState } from "react";
 import { getCategories } from "../queries/getCategories.jsx";
 import { useQuery } from "@tanstack/react-query";
+import { getTags } from "../queries/getTags.jsx";
+import { getStates } from "../queries/getStates.jsx";
+import { postTask } from "../queries/postTask.jsx"
 
-function LoadForm(categoryTitle) {
+function LoadForm({categoryTitle, closeForm}) {
   const [taskTitle, setTaskTitle] = useState("");
   const [selectedCategory, setSelectedCategory] = useState(categoryTitle);
-  const { isPending, isError, data, error } = useQuery({
+  const [selectedState, setSelectedState] = useState("");
+  const [selectedTags, setSelectedTags] = useState([]);
+
+  const {
+    data: tagsData,
+    isLoading: tagsLoading,
+    isError: tagsError,
+    error: tagsErrorObj,
+  } = useQuery({
+    queryKey: ["Tags"],
+    queryFn: () => getTags(),
+  });
+
+  const {
+    data: categoriesData,
+    isLoading: categoriesLoading,
+    isError: categoriesError,
+    error: categoriesErrorObj,
+  } = useQuery({
     queryKey: ["categories"],
     queryFn: () => getCategories(),
   });
 
-  if (isPending) {
+  const {
+    data: statusData,
+    isLoading: statusLoading,
+    isError: statusError,
+    error: statusErrorObj,
+  } = useQuery({
+    queryKey: ["task-statuses"],
+    queryFn: () => getStates(),
+  });
+
+  if (tagsLoading || categoriesLoading || statusLoading) {
     return <span>Loading...</span>;
   }
-  if (isError) {
-    return <span>Error: {error.message}</span>;
+  if (tagsError) {
+    return <span>Error: {tagsErrorObj.message}</span>;
+  }
+  if (categoriesError) {
+    return <span>Error: {categoriesErrorObj.message}</span>;
+  }
+  if (statusError) {
+    return <span>Error: {statusErrorObj.message}</span>;
   }
 
-  const categories = data.data;
+  const categories = categoriesData.data || [];
+  const tags = tagsData?.data || tagsData || [];
+  const states = statusData?.data || statusData || [];
+
+  const handleTagChange = (e) => {
+    const tagId = e.target.value;
+    setSelectedTags((prev) =>
+      e.target.checked ? [...prev, tagId] : prev.filter((id) => id !== tagId)
+    );
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Task Title:", taskTitle);
-    console.log("Selected Category:", selectedCategory);
-    setTaskTitle("");
+    const data = {
+      data: {
+      Title: taskTitle,
+      category: selectedCategory,
+      task_status: selectedState,
+      tags: selectedTags,
+      }
+    };
+    postTask(data);
+
+  setTaskTitle("");
+  setSelectedCategory("");
+  setSelectedState("");
+  setSelectedTags([]);
+
+  closeForm();
   };
 
   return (
@@ -46,11 +105,35 @@ function LoadForm(categoryTitle) {
           onChange={(e) => setSelectedCategory(e.target.value)}
         >
           {categories.map((category) => (
-            <option key={category.documentId} value={category.Title}>
+            <option key={category.documentId} value={category.documentId}>
               {category.Title}
             </option>
           ))}
         </select>
+
+        <select
+          id="states"
+          value={selectedState}
+          onChange={(e) => setSelectedState(e.target.value)}
+        >
+          {states.map((state) => (
+            <option key={state.documentId} value={state.documentId}>
+              {state.CurrentStatus}
+            </option>
+          ))}
+        </select>
+
+        {tags.map((tag) => (
+          <label key={tag.documentId}>
+            {tag.Title}
+            <input
+              type="checkbox"
+              value={tag.documentId}
+              checked={selectedTags.includes(tag.documentId)}
+              onChange={handleTagChange}
+            ></input>
+          </label>
+        ))}
 
         <button type="submit">Submit</button>
       </form>
