@@ -403,6 +403,31 @@ export interface ApiCategoryCategory extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiTagTag extends Struct.CollectionTypeSchema {
+  collectionName: 'tags';
+  info: {
+    displayName: 'Tag';
+    pluralName: 'tags';
+    singularName: 'tag';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::tag.tag'> &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    Title: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiTaskStatusTaskStatus extends Struct.CollectionTypeSchema {
   collectionName: 'task_statuses';
   info: {
@@ -452,6 +477,7 @@ export interface ApiTaskTask extends Struct.CollectionTypeSchema {
     localizations: Schema.Attribute.Relation<'oneToMany', 'api::task.task'> &
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
+    tags: Schema.Attribute.Relation<'oneToMany', 'api::tag.tag'>;
     task_status: Schema.Attribute.Relation<
       'manyToOne',
       'api::task-status.task-status'
@@ -973,6 +999,7 @@ declare module '@strapi/strapi' {
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
       'api::category.category': ApiCategoryCategory;
+      'api::tag.tag': ApiTagTag;
       'api::task-status.task-status': ApiTaskStatusTaskStatus;
       'api::task.task': ApiTaskTask;
       'plugin::content-releases.release': PluginContentReleasesRelease;

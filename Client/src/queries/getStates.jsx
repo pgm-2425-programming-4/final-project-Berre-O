@@ -1,6 +1,6 @@
 import { KEY, API_URL } from "../constants/constants.js";
 
-export async function getTasks() {
+export async function getStates() {
   const settings = {
     method: "GET",
     headers: {
@@ -9,7 +9,8 @@ export async function getTasks() {
     },
   };
 
-  const result = await fetch(`${API_URL}tasks?populate=*`, settings);
+  const result = await fetch(`${API_URL}task-statuses`, settings);
   const data = await result.json();
+
   return data;
 }
