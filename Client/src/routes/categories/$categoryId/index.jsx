@@ -18,6 +18,8 @@ function TaskSection({ title, tasks }) {
     modifier = "background-container--blue";
   } else if(title === "Completed") {
     modifier = "background-container--green";
+  } else if (title === "Under Review") {
+    modifier = "background-container--purple";
   }
 
   return (
@@ -55,6 +57,7 @@ function RouteComponent() {
   const statusMap = {
     Uncomplete: "To Do",
     Progress: "In Progress",
+    Review: "Under Review",
     Complete: "Completed",
   };
 

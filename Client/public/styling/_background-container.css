@@ -22,3 +22,8 @@
   background-color: var(--background-color-green);
   border: 1px solid var(--background-color-green);
 }
+
+.background-container--purple {
+  background-color: var(--background-color-purple);
+  border: 1px solid var(--background-color-purple);
+}

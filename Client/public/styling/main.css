@@ -8,10 +8,17 @@
 @import url("./_card-group.css");
 @import url("./_task.css");
 @import url("./_background-container.css");
+@import url("./_pagination.css");
+@import url("./_container.css");
+@import url("./_backlog.css");
 
 * {
   font-family: var(--font-family);
   color: var(--color-text-primary);
+}
+
+body {
+  overflow-x: hidden;
 }
 
 ul {

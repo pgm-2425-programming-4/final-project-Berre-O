@@ -1,0 +1,8 @@
+
+.container {
+    display: flex;
+    justify-content: space-evenly;
+    gap: var(--spacing-lg);
+    padding: var(--spacing-lg);
+    height: 100vh;
+}
