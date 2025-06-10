@@ -97,57 +97,75 @@ function LoadForm({ categoryId, closeForm }) {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="title">Title</label>
-        <input
-          type="text"
-          id="title"
-          name="title"
-          placeholder="Enter a task title"
-          value={taskTitle}
-          onChange={(e) => setTaskTitle(e.target.value)}
-        />
+    <form className="form" onSubmit={handleSubmit}>
+      <label htmlFor="title">Title</label>
+      <input
+      required
+        className="form__input form__input--text"
+        type="text"
+        id="title"
+        name="title"
+        placeholder="Enter a task title"
+        value={taskTitle}
+        onChange={(e) => setTaskTitle(e.target.value)}
+      />
 
-        <label htmlFor="description">Description</label>
-        <input
-          type="text"
-          id="description"
-          name="description"
-          placeholder="Enter a task description"
-          value={taskDescription}
-          onChange={(e) => setTaskDescription(e.target.value)}
-        />
+      <label htmlFor="description">Description</label>
+      <textarea
+      required
+        className="form__textarea"
+        id="description"
+        name="description"
+        placeholder="Enter a task description"
+        value={taskDescription}
+        onChange={(e) => setTaskDescription(e.target.value)}
+      />
 
-        <label htmlFor="category">Category</label>
-        <select
-          id="category"
-          value={selectedCategory}
-          onChange={(e) => setSelectedCategory(e.target.value)}
-        >
-          {categories.map((category) => (
-            <option key={category.documentId} value={category.documentId}>
-              {category.Title}
-            </option>
-          ))}
-        </select>
+      <label htmlFor="category">Category</label>
+      <select
+      required
+        className="dropdown"
+        id="category"
+        value={selectedCategory}
+        onChange={(e) => setSelectedCategory(e.target.value)}
+      >
+        {categories.map((category) => (
+          <option
+            className="dropdown__option"
+            key={category.documentId}
+            value={category.documentId}
+          >
+            {category.Title}
+          </option>
+        ))}
+      </select>
 
-        <select
-          id="states"
-          value={selectedState}
-          onChange={(e) => setSelectedState(e.target.value)}
-        >
-          <option value="">--Select a state</option>
-          {states.map((state) => (
-            <option key={state.documentId} value={state.documentId}>
-              {state.CurrentStatus}
-            </option>
-          ))}
-        </select>
+      <select
+      required
+        className="dropdown"
+        id="states"
+        value={selectedState}
+        onChange={(e) => setSelectedState(e.target.value)}
+      >
+        <option className="dropdown__option" value="">
+          --Select a state
+        </option>
+        {states.map((state) => (
+          <option
+            className="dropdown__option"
+            key={state.documentId}
+            value={state.documentId}
+          >
+            {state.CurrentStatus}
+          </option>
+        ))}
+      </select>
 
+      <div className="form__checkboxes">
         {tags.map((tag) => (
-          <label key={tag.documentId}>
+          <label className="checkbox" key={tag.documentId}>
             <input
+              className="checkbox__input"
               type="checkbox"
               value={tag.documentId}
               checked={selectedTags.includes(tag.documentId)}
@@ -156,10 +174,17 @@ function LoadForm({ categoryId, closeForm }) {
             {tag.Title}
           </label>
         ))}
+      </div>
 
-        <button type="submit" className="btn">Submit</button>
-      </form>
-    </div>
+      <div className="form__btns">
+        <button type="submit" className="btn">
+          Submit
+        </button>
+        <button onClick={closeForm} className="btn btn--destructive">
+          Close
+        </button>
+      </div>
+    </form>
   );
 }
 

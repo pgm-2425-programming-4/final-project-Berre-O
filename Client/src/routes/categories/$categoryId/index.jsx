@@ -97,14 +97,16 @@ function RouteComponent() {
       </header>
 
       <dialog ref={dialogRef} onClose={closeForm} className="dialog">
-        <button onClick={closeForm} className="btn btn--destructive">
-          Close
-        </button>
-        <Form
-          categoryId={documentId}
-          categoryTitle={Title}
-          closeForm={closeForm}
-        />
+        <div className="dialog__content">
+          <div className="dialog__header">
+            <h2 className="dialog__title">Add New Task</h2>
+          </div>
+          <Form
+            categoryId={documentId}
+            categoryTitle={Title}
+            closeForm={closeForm}
+          />
+        </div>
       </dialog>
 
       <section className="container">

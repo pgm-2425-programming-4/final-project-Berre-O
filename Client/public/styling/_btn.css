@@ -22,4 +22,9 @@
 
 .btn--destructive {
     background-color: var(--color-btn-destructive);
+    transition: background-color 100ms ease-in-out;
+}
+
+.btn--destructive:hover {
+    background-color: var(--color-btn-destructive-hover);
 }

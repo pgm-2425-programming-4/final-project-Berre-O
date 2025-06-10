@@ -40,11 +40,21 @@ function Index() {
     <>
       <div class="backlog">
         <section className="card-group card-group--wide">
-          <ul className="list">
+          <ul className="list list--task">
             {tasks.map((task) => (
               <li key={task.id} className="task">
-                <h2 className="task-title">{task.Title}</h2>
-                <p className="task__description">{task.category.Title}</p>
+                <h2 className="task__title task__title--big">{task.Title}</h2>
+                <div className="task__info">
+                <p className="task__description">{task.category?.Title}</p>
+                  <div className="task__tags">
+                    {task?.tags.map((tag) => (
+                      <span key={tag.Title} className="task__tag">
+                        {tag.Title}
+                      </span>
+                    ))}
+                  </div>
+                  </div>
+                    <p className="task__description">{task?.Description}</p>
               </li>
             ))}
           </ul>

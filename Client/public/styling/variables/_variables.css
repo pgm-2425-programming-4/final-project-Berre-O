@@ -17,6 +17,7 @@
   --color-btn-background-hover: #2563eb;
   --color-btn-foreground: var(--color-background);
   --color-btn-destructive: #ef4444;
+  --color-btn-destructive-hover: #dc2626;
 
   /* Column Borders */
   --color-column-border: #d1d5db;

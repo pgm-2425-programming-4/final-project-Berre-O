@@ -11,6 +11,10 @@
 @import url("./_pagination.css");
 @import url("./_container.css");
 @import url("./_backlog.css");
+@import url("./_dialog.css");
+@import url("./_form.css");
+@import url("./_dropdown.css");
+@import url("./_checkbox.css");
 
 * {
   font-family: var(--font-family);
