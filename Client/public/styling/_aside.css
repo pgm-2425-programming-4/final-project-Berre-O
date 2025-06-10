@@ -1,0 +1,17 @@
+.aside {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-2xl);
+    max-width: var(--spacing-3xl);
+    padding: var(--spacing-xl);
+    width: 100%;
+
+    background-color: var(--color-sidebar);
+
+    z-index: 1;
+  box-shadow: 4px 0 12px -4px var(--shadow-color);
+
+    .aside__title {
+        font-size: var(--spacing-xl);
+    }
+}
