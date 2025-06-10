@@ -3,11 +3,40 @@
   background-color: var(--color-sidebar);
 
   border-radius: var(--radius-md);
-  padding: var(--spacing-xl);
+  padding: var(--spacing-sm);
   box-shadow: var(--shadow-sm);
   transition: box-shadow 150ms ease-in-out;
+  min-height: 15vh;
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+
+  .task__info {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .task__description {
+    width: 50%;
+  }
+
+  .task__tags {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: var(--spacing-xs);
+    height: var(--spacing-md);
+  }
+
+  .task__tag {
+    background-color: var(--color-tag-background);
+    color: var(--color-tag-foreground);
+    border-radius: var(--radius-sm);
+    padding: var(--spacing-xs) var(--spacing-sm);
+  }
 }
 
 .task:hover {
-    box-shadow: var(--shadow-md);
+  box-shadow: var(--shadow-md);
 }

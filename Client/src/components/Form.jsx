@@ -10,6 +10,7 @@ function LoadForm({ categoryId, closeForm }) {
   const router = useRouter();
 
   const [taskTitle, setTaskTitle] = useState("");
+  const [taskDescription, setTaskDescription] = useState("");
   const [selectedCategory, setSelectedCategory] = useState(categoryId);
   const [selectedState, setSelectedState] = useState("");
   const [selectedTags, setSelectedTags] = useState([]);
@@ -73,6 +74,7 @@ function LoadForm({ categoryId, closeForm }) {
     const data = {
       data: {
         Title: taskTitle,
+        Description: taskDescription,
         category: selectedCategory,
         task_status: selectedState,
         tags: selectedTags,
@@ -84,6 +86,7 @@ function LoadForm({ categoryId, closeForm }) {
       await router.invalidate();
 
       setTaskTitle("");
+      setTaskDescription("");
       setSelectedCategory("");
       setSelectedState("");
       setSelectedTags([]);
@@ -104,6 +107,16 @@ function LoadForm({ categoryId, closeForm }) {
           placeholder="Enter a task title"
           value={taskTitle}
           onChange={(e) => setTaskTitle(e.target.value)}
+        />
+
+        <label htmlFor="description">Description</label>
+        <input
+          type="text"
+          id="description"
+          name="description"
+          placeholder="Enter a task description"
+          value={taskDescription}
+          onChange={(e) => setTaskDescription(e.target.value)}
         />
 
         <label htmlFor="category">Category</label>

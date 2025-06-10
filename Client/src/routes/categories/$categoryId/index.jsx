@@ -14,9 +14,9 @@ export const Route = createFileRoute("/categories/$categoryId/")({
 
 function TaskSection({ title, tasks }) {
   let modifier = "";
-  if(title === "To Do") {
+  if (title === "To Do") {
     modifier = "background-container--blue";
-  } else if(title === "Completed") {
+  } else if (title === "Completed") {
     modifier = "background-container--green";
   } else if (title === "Under Review") {
     modifier = "background-container--purple";
@@ -30,7 +30,16 @@ function TaskSection({ title, tasks }) {
         {tasks.map((task) => (
           <li key={task.id} className="task">
             <h2 className="task__title">{task.Title}</h2>
-            <p className="task__description">{task.category.Title}</p>
+            <div className="task__info">
+              <p className="task__description">{task?.Description}</p>
+              <div className="task__tags">
+                {task.tags.map((tag) => (
+                  <span key={tag.Title} className="task__tag">
+                    {tag.Title}
+                  </span>
+                ))}
+              </div>
+            </div>
           </li>
         ))}
       </ul>
