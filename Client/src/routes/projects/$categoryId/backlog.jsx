@@ -4,7 +4,7 @@ import { getTasks } from "../../../queries/getBacklog.jsx";
 import { useState } from "react";
 import { Pagination } from "../../../pagination/Pagination.jsx";
 
-export const Route = createFileRoute("/categories/$categoryId/backlog")({
+export const Route = createFileRoute("/projects/$categoryId/backlog")({
   component: Index,
 });
 

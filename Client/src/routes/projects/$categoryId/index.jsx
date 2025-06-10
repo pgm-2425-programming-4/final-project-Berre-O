@@ -3,7 +3,7 @@ import { getCurrentCategory } from "../../../queries/getCurrentCategory.jsx";
 import Form from "../../../components/Form.jsx";
 import { useRef, useState, useEffect } from "react";
 
-export const Route = createFileRoute("/categories/$categoryId/")({
+export const Route = createFileRoute("/projects/$categoryId/")({
   loader: async ({ params }) => {
     const data = await getCurrentCategory(params.categoryId);
     return data.data;
@@ -87,7 +87,7 @@ function RouteComponent() {
           </button>
           <h2 className="btn header__btn">
             <Link
-              to="/categories/$categoryId/backlog"
+              to="/projects/$categoryId/backlog"
               params={{ categoryId: documentId }}
             >
               Backlog

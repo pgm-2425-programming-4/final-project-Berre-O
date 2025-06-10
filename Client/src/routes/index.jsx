@@ -7,7 +7,9 @@ export const Route = createFileRoute("/")({
 function Index() {
   return (
     <>
-      <div className="p-2 flex gap-2">Select a Category</div>
+      <div className="main__container">
+        <h1 className="main__title">Select a Category</h1>
+      </div>
     </>
   );
 }

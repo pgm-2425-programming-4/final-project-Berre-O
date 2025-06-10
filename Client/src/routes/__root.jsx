@@ -59,7 +59,7 @@ function RootLayout() {
                 <path d="m6 14 1.45-2.9A2 2 0 0 1 9.24 10H20a2 2 0 0 1 1.73 3L18 18H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h3.93a2 2 0 0 1 1.66.9l.82 1.2a2 2 0 0 0 1.66.9H18a2 2 0 0 1 2 2v2" />
               </svg>
               <Link
-                to="/categories/$categoryId"
+                to="/projects/$categoryId"
                 params={{ categoryId: category.documentId }}
               >
                 <h3 className="list__item-title">{category.Title}</h3>
