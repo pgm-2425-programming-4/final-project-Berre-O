@@ -121,7 +121,7 @@ function LoadForm({ categoryId, closeForm }) {
         onChange={(e) => setTaskDescription(e.target.value)}
       />
 
-      <label htmlFor="category">Category</label>
+      <label htmlFor="category">Project</label>
       <select
       required
         className="dropdown"

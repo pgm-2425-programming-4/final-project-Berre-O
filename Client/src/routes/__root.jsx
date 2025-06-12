@@ -10,9 +10,23 @@ import { getCategories } from "../queries/getCategories.jsx";
 export const Route = createRootRoute({
   loader: async () => {
     const res = await getCategories();
-    const data = res?.data || [];
-    return data;
+
+    if (!res?.data) {
+      throw new Error("API is offline or returned no data");
+    }
+
+    return res.data;
   },
+
+  errorComponent: () => (
+    <div className="error-container">
+      <div className="error">
+        <h1 className="error__title">Unable to load project manager</h1>
+        <p className="error__text">The server might be offline or your connection is down.</p>
+        <p className="error__tip">Please try refreshing the page or come back later.</p>
+      </div>
+    </div>
+  ),
 
   component: RootLayout,
 });
