@@ -1,0 +1,29 @@
+.error {
+    display: flex;
+    justify-content: left;
+    gap: var(--spacing-sm);
+    flex-direction: column;
+    font-family: var(--font-family);
+
+    .error__title {
+        font-weight: var(--font-weight-bold);
+        font-size: var(--spacing-xl);
+    }
+
+    .error__text,
+    .error__title {
+        color: var(--color-text-primary);
+    }
+
+    .error__tip {
+        color: var(--color-text-secondary);
+    }
+}
+
+.error-container {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
