@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-function OpenDialog({ task, onChangeState }) {
+function OpenDialog({ task, onChangeState, onClose }) {
   const [currentState, setCurrentState] = useState(
     task.task_status.CurrentStatus
   );
@@ -13,20 +13,27 @@ function OpenDialog({ task, onChangeState }) {
   };
 
   return (
-    <dialog open>
-      <h2>{task.Title}</h2>
-      <p>{task.Description}</p>
-      <div>
-        <button onClick={() => handleChangeState("Uncomplete")}>
+    <dialog open className="dialog">
+      <div className="dialog__header">
+          <h2 className="dialog__title">{task.Title}</h2>
+          <button onClick={onClose} className="btn btn--destructive">
+            Close
+          </button>
+      </div>
+      <p className="dialog__content">{task.Description}</p>
+      <div className="dialog__btns">
+        <button className="btn" onClick={() => handleChangeState("Uncomplete")}>
           Uncomplete
         </button>
-        <button onClick={() => handleChangeState("Progress")}>
+        <button className="btn" onClick={() => handleChangeState("Progress")}>
           In Progress
         </button>
-        <button onClick={() => handleChangeState("Review")}>
+        <button className="btn" onClick={() => handleChangeState("Review")}>
           Under Review
         </button>
-        <button onClick={() => handleChangeState("Complete")}>Complete</button>
+        <button className="btn" onClick={() => handleChangeState("Complete")}>
+          Complete
+        </button>
       </div>
       <p>Current state: {currentState}</p>
     </dialog>
@@ -34,3 +41,4 @@ function OpenDialog({ task, onChangeState }) {
 }
 
 export default OpenDialog;
+

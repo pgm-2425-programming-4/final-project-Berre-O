@@ -22,7 +22,6 @@ function TaskSection({ title, tasks }) {
           <li key={task.id} className="task" onClick={() => setOpenTask(task)}>
             <h2 className="task__title">{task.Title}</h2>
             <div className="task__info">
-              <p className="task__description">{task?.Description}</p>
               <div className="task__tags">
                 {task.tags.map((tag) => (
                   <span key={tag.Title} className="task__tag">
