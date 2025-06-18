@@ -17,6 +17,7 @@ export const Route = createFileRoute("/projects/$categoryId/")({
 });
 
 function RouteComponent() {
+  const [selectedTagId, setSelectedTagId] = useState("");
   const { tasks = [], documentId, Title } = Route.useLoaderData();
   const dialogRef = useRef(null);
   const [showForm, setShowForm] = useState(false);
@@ -62,12 +63,15 @@ function RouteComponent() {
       <header className="header">
         <h1 className="header__title">Project Dashboard</h1>
         <div className="header__btns">
-          <select defaultValue="">
-            <option value="">-- All tasks --</option>
+          <select
+            value={selectedTagId}
+            onChange={(e) => setSelectedTagId(e.target.value)}
+          >
+            <option value="">-- All Tags --</option>
             {!tagsLoading &&
               !tagsError &&
               tagsData.data?.map((tag) => (
-                <option key={tag.id} value={tag.id}>
+                <option key={tag.documentId} value={tag.documentId}>
                   {tag.Title}
                 </option>
               ))}
@@ -105,6 +109,7 @@ function RouteComponent() {
             key={statusKey}
             title={label}
             tasks={groupedTasks[statusKey] || []}
+            selectedTagId={selectedTagId}
           />
         ))}
       </section>
