@@ -64,14 +64,15 @@ function RouteComponent() {
         <h1 className="header__title">Project Dashboard</h1>
         <div className="header__btns">
           <select
+          className="dropdown"
             value={selectedTagId}
             onChange={(e) => setSelectedTagId(e.target.value)}
           >
-            <option value="">-- All Tags --</option>
+            <option className="dropdown__option" value="">-- All Tags --</option>
             {!tagsLoading &&
               !tagsError &&
               tagsData.data?.map((tag) => (
-                <option key={tag.documentId} value={tag.documentId}>
+                <option className="dropdown__option" key={tag.documentId} value={tag.documentId}>
                   {tag.Title}
                 </option>
               ))}
