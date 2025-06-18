@@ -1,26 +1,26 @@
 import { useState } from "react";
 import { updateTask } from "../queries/updateTask.jsx";
 import { useQuery } from "@tanstack/react-query";
-import { getStates } from"../queries/getStates";
+import { getStates } from "../queries/getStates";
+import { useRouter } from "@tanstack/react-router";
 
 function OpenDialog({ task, onClose }) {
+  const router = useRouter();
   const [currentState, setCurrentState] = useState(
     task.task_status.CurrentStatus
   );
 
-  const {
-    data: statusData,
-  } = useQuery({
+  const { data: statusData } = useQuery({
     queryKey: ["task-statuses"],
     queryFn: () => getStates(),
   });
 
-console.log(statusData)
-
   const handleChangeState = (newState) => {
     setCurrentState(newState);
     if (!statusData) return;
-    const newStateObj = statusData.data.find(state => state.CurrentStatus === newState);
+    const newStateObj = statusData.data.find(
+      (state) => state.CurrentStatus === newState
+    );
     if (updateTask && newStateObj) {
       const data = {
         data: {
@@ -28,6 +28,7 @@ console.log(statusData)
         },
       };
       updateTask(data, task.documentId);
+      router.invalidate();
     }
   };
 
