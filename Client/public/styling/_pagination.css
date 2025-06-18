@@ -1,0 +1,88 @@
+.pagination-container {
+  font-family: var(--font-family);
+  color: var(--color-text-primary);
+
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-md);
+  padding: var(--spacing-md) 0;
+  margin-top: var(--spacing-lg);
+  border-top: 1px solid var(--color-border);
+
+}
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-md);
+  padding: var(--spacing-sm) 0;
+
+  .pagination__list {
+    list-style: none;
+    display: flex;
+    gap: var(--spacing-sm);
+    margin: 0;
+    padding: 0;
+  }
+
+  .pagination__link {
+    background-color: var(--color-sidebar);
+    color: var(--color-text-primary);
+    border: 1px solid var(--color-border);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: var(--font-weight-normal);
+    transition:
+      background-color 0.2s ease,
+      color 0.2s ease,
+      border-color 0.2s ease;
+    box-shadow: var(--shadow-sm);
+
+    &:hover {
+      background-color: var(--color-background);
+      border-color: var(--color-column-border);
+    }
+
+    &.is-current {
+      background-color: var(--color-btn-background);
+      color: var(--color-btn-foreground);
+      font-weight: var(--font-weight-bold);
+      pointer-events: none;
+      border-color: transparent;
+    }
+  }
+
+  .pagination__ellipsis {
+    display: inline-block;
+    padding: var(--spacing-xs) var(--spacing-sm);
+    color: var(--color-text-secondary);
+    font-size: 1rem;
+  }
+
+  .pagination__previous,
+  .pagination__next {
+    background-color: var(--color-btn-background);
+    color: var(--color-btn-foreground);
+    border: none;
+    padding: var(--spacing-xs) var(--spacing-md);
+    border-radius: var(--radius-sm);
+    font-size: 1rem;
+    font-weight: var(--font-weight-bold);
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    box-shadow: var(--shadow-sm);
+
+    &:hover {
+      background-color: var(--color-btn-background-hover);
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+}

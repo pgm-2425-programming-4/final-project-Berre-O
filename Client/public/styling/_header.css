@@ -1,0 +1,15 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    padding: var(--spacing-2xl);
+
+    .header__btns {
+        display: flex;
+        gap: var(--spacing-lg);
+    }
+
+    .header__title {
+        font-size: var(--spacing-xl);
+        font-weight: var(--font-weight-bold);
+    }
+}

@@ -1,0 +1,30 @@
+.btn {
+    background-color: var(--color-btn-background);
+    color: var(--color-btn-foreground);
+    border-radius: var(--radius-md);
+    width: fit-content;
+    padding: var(--spacing-sm);
+    padding-left: var(--spacing-md);
+    padding-right: var(--spacing-md);
+    cursor: pointer;
+    font-size: var(--spacing-md);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 4;
+
+    transition: background-color 100ms ease-in-out;
+}
+
+.btn:hover {
+    background-color: var(--color-btn-background-hover);
+}
+
+.btn--destructive {
+    background-color: var(--color-btn-destructive);
+    transition: background-color 100ms ease-in-out;
+}
+
+.btn--destructive:hover {
+    background-color: var(--color-btn-destructive-hover);
+}

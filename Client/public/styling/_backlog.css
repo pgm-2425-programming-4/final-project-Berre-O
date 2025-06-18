@@ -1,0 +1,8 @@
+.backlog {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: var(--spacing-2xl);
+    height: 100vh;
+}

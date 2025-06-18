@@ -1,0 +1,20 @@
+
+  .checkbox {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    font-size: 0.95rem;
+    padding: var(--spacing-xs) var(--spacing-sm);
+    transition: background-color 0.2s ease;
+
+    &:hover {
+      background-color: var(--color-background);
+    }
+
+    .checkbox__input {
+      accent-color: var(--color-btn-background);
+      width: 16px;
+      height: 16px;
+      margin: 0;
+    }
+  }

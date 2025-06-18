@@ -33,16 +33,16 @@ export function Pagination({ currentPage, pageCount, onPageChanged }) {
   pageNumberArray.forEach((pageNumber, index) => {
     if (pageNumber === null) {
       pageLinks.push(
-        <li key={index}>
-          <span className="pagination-ellipsis">&hellip;</span>
+        <li key={index} class="p">
+          <span className="pagination__ellipsis">&hellip;</span>
         </li>
       );
     } else {
       pageLinks.push(
-        <li key={index}>
+        <li key={index} className="pagination__item">
           <button
             className={
-              "pagination-link " +
+              "pagination__link " +
               (pageNumber === currentPage ? "is-current" : "")
             }
             aria-label={`Go to page ${pageNumber}`}
@@ -58,20 +58,20 @@ export function Pagination({ currentPage, pageCount, onPageChanged }) {
   return (
     <nav className="pagination" role="navigation" aria-label="pagination">
       <button
-        className="pagination-previous"
+        className="pagination__previous"
         disabled={currentPage === 1}
         onClick={() => onPageChanged(currentPage - 1)}
       >
         Previous
       </button>
       <button
-        className="pagination-next"
+        className="pagination__next"
         disabled={currentPage === pageCount}
         onClick={() => onPageChanged(currentPage + 1)}
       >
         Next page
       </button>
-      <ul className="pagination-list">{pageLinks}</ul>
+      <ul className="pagination__list">{pageLinks}</ul>
     </nav>
   );
 }
