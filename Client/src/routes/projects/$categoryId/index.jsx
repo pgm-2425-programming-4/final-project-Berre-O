@@ -1,4 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { useQuery } from "@tanstack/react-query";
+import { getTags } from "../../../queries/getTags.jsx";
 import { getCurrentCategory } from "../../../queries/getCurrentCategory.jsx";
 import Form from "../../../components/Form.jsx";
 import { useRef, useState, useEffect } from "react";
@@ -15,6 +17,7 @@ export const Route = createFileRoute("/projects/$categoryId/")({
 });
 
 function RouteComponent() {
+  const [selectedTagId, setSelectedTagId] = useState("");
   const { tasks = [], documentId, Title } = Route.useLoaderData();
   const dialogRef = useRef(null);
   const [showForm, setShowForm] = useState(false);
@@ -26,6 +29,17 @@ function RouteComponent() {
       dialogRef.current?.close();
     }
   }, [showForm]);
+
+  const {
+    data: tagsData,
+    isLoading: tagsLoading,
+    isError: tagsError,
+  } = useQuery({
+    queryKey: ["Tags"],
+    queryFn: () => getTags(),
+  });
+
+  console.log(tagsData);
 
   const closeForm = () => setShowForm(false);
   const openForm = () => setShowForm(true);
@@ -49,6 +63,20 @@ function RouteComponent() {
       <header className="header">
         <h1 className="header__title">Project Dashboard</h1>
         <div className="header__btns">
+          <select
+          className="dropdown"
+            value={selectedTagId}
+            onChange={(e) => setSelectedTagId(e.target.value)}
+          >
+            <option className="dropdown__option" value="">-- All Tags --</option>
+            {!tagsLoading &&
+              !tagsError &&
+              tagsData.data?.map((tag) => (
+                <option className="dropdown__option" key={tag.documentId} value={tag.documentId}>
+                  {tag.Title}
+                </option>
+              ))}
+          </select>
           <button onClick={openForm} className="btn header__btn">
             + Add task
           </button>
@@ -82,6 +110,7 @@ function RouteComponent() {
             key={statusKey}
             title={label}
             tasks={groupedTasks[statusKey] || []}
+            selectedTagId={selectedTagId}
           />
         ))}
       </section>

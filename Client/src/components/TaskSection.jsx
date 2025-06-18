@@ -1,8 +1,8 @@
 import { useState } from "react";
 import OpenDialog from "./OpenDialog.jsx";
-import ModalPortal from "./ModalPortal.jsx"
+import ModalPortal from "./ModalPortal.jsx";
 
-function TaskSection({ title, tasks }) {
+function TaskSection({ title, tasks, selectedTagId }) {
   const [openTask, setOpenTask] = useState(null);
 
   let modifier = "";
@@ -14,12 +14,16 @@ function TaskSection({ title, tasks }) {
     modifier = "background-container--purple";
   }
 
+  const visibleTasks = selectedTagId
+    ? tasks.filter((task) => task.tags.some((tag) => tag.documentId === selectedTagId))
+    : tasks;
+
   return (
     <div className={`card-group`}>
       <div className={`background-container ${modifier}`}></div>
       <h2 className="card-group__title">{title}</h2>
       <ul className="list list--task">
-        {tasks.map((task) => (
+        {visibleTasks.map((task) => (
           <li key={task.id} className="task" onClick={() => setOpenTask(task)}>
             <h2 className="task__title">{task.Title}</h2>
             <div className="task__info">
