@@ -1,4 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { useQuery } from "@tanstack/react-query";
+import { getTags } from "../../../queries/getTags.jsx";
 import { getCurrentCategory } from "../../../queries/getCurrentCategory.jsx";
 import Form from "../../../components/Form.jsx";
 import { useRef, useState, useEffect } from "react";
@@ -27,6 +29,17 @@ function RouteComponent() {
     }
   }, [showForm]);
 
+  const {
+    data: tagsData,
+    isLoading: tagsLoading,
+    isError: tagsError,
+  } = useQuery({
+    queryKey: ["Tags"],
+    queryFn: () => getTags(),
+  });
+
+  console.log(tagsData);
+
   const closeForm = () => setShowForm(false);
   const openForm = () => setShowForm(true);
 
@@ -49,6 +62,16 @@ function RouteComponent() {
       <header className="header">
         <h1 className="header__title">Project Dashboard</h1>
         <div className="header__btns">
+          <select defaultValue="">
+            <option value="">-- All tasks --</option>
+            {!tagsLoading &&
+              !tagsError &&
+              tagsData.data?.map((tag) => (
+                <option key={tag.id} value={tag.id}>
+                  {tag.Title}
+                </option>
+              ))}
+          </select>
           <button onClick={openForm} className="btn header__btn">
             + Add task
           </button>
