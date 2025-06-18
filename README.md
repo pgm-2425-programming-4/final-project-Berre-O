@@ -1,1 +1,1 @@
-Website: https://www.final-project-berre-o.netlify.app
+Website: https://final-project-berre-o.netlify.app
