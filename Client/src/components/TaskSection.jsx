@@ -1,5 +1,6 @@
 import { useState } from "react";
 import OpenDialog from "./OpenDialog.jsx";
+import ModalPortal from "./ModalPortal.jsx"
 
 function TaskSection({ title, tasks }) {
   const [openTask, setOpenTask] = useState(null);
@@ -34,11 +35,15 @@ function TaskSection({ title, tasks }) {
         ))}
       </ul>
       {openTask && (
-        <OpenDialog
-          task={openTask}
-          onChangeState={() => {}}
-          onClose={() => setOpenTask(null)}
-        />
+        <ModalPortal>
+          <div className="dialog-backdrop">
+            <OpenDialog
+              task={openTask}
+              onChangeState={() => {}}
+              onClose={() => setOpenTask(null)}
+            />
+          </div>
+        </ModalPortal>
       )}
     </div>
   );
