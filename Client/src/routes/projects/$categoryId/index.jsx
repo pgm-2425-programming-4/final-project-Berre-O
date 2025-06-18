@@ -3,6 +3,7 @@ import { getCurrentCategory } from "../../../queries/getCurrentCategory.jsx";
 import Form from "../../../components/Form.jsx";
 import { useRef, useState, useEffect } from "react";
 import TaskSection from "../../../components/TaskSection.jsx";
+import ModalPortal from "../../../components/ModalPortal.jsx";
 
 export const Route = createFileRoute("/projects/$categoryId/")({
   loader: async ({ params }) => {
@@ -12,7 +13,6 @@ export const Route = createFileRoute("/projects/$categoryId/")({
   component: RouteComponent,
   notFoundComponent: () => <div>Category not found</div>,
 });
-
 
 function RouteComponent() {
   const { tasks = [], documentId, Title } = Route.useLoaderData();
