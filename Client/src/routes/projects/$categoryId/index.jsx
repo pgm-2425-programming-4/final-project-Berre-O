@@ -2,6 +2,8 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { getCurrentCategory } from "../../../queries/getCurrentCategory.jsx";
 import Form from "../../../components/Form.jsx";
 import { useRef, useState, useEffect } from "react";
+import TaskSection from "../../../components/TaskSection.jsx";
+import ModalPortal from "../../../components/ModalPortal.jsx";
 
 export const Route = createFileRoute("/projects/$categoryId/")({
   loader: async ({ params }) => {
@@ -11,41 +13,6 @@ export const Route = createFileRoute("/projects/$categoryId/")({
   component: RouteComponent,
   notFoundComponent: () => <div>Category not found</div>,
 });
-
-function TaskSection({ title, tasks }) {
-  let modifier = "";
-  if (title === "To Do") {
-    modifier = "background-container--blue";
-  } else if (title === "Completed") {
-    modifier = "background-container--green";
-  } else if (title === "Under Review") {
-    modifier = "background-container--purple";
-  }
-
-  return (
-    <div className={`card-group`}>
-      <div className={`background-container ${modifier}`}></div>
-      <h2 className="card-group__title">{title}</h2>
-      <ul className="list list--task">
-        {tasks.map((task) => (
-          <li key={task.id} className="task">
-            <h2 className="task__title">{task.Title}</h2>
-            <div className="task__info">
-              <p className="task__description">{task?.Description}</p>
-              <div className="task__tags">
-                {task.tags.map((tag) => (
-                  <span key={tag.Title} className="task__tag">
-                    {tag.Title}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-}
 
 function RouteComponent() {
   const { tasks = [], documentId, Title } = Route.useLoaderData();

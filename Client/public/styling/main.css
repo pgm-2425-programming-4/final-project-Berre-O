@@ -15,6 +15,7 @@
 @import url("./_form.css");
 @import url("./_dropdown.css");
 @import url("./_checkbox.css");
+@import url("./_error.css");
 
 * {
   font-family: var(--font-family);
