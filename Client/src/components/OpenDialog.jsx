@@ -44,6 +44,9 @@ function OpenDialog({ task, onClose }) {
         <p className="dialog__desc">{task.Description}</p>
         <p>Current state: {currentState}</p>
         <div className="dialog__btns">
+          <button className="btn" onClick={() => handleChangeState("Backlog")}>
+            Backlog
+          </button>
           <button
             className="btn"
             onClick={() => handleChangeState("Uncomplete")}

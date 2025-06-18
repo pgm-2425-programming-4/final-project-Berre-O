@@ -3,12 +3,15 @@ import { useQuery } from "@tanstack/react-query";
 import { getTasks } from "../../../queries/getBacklog.jsx";
 import { useState } from "react";
 import { Pagination } from "../../../pagination/Pagination.jsx";
+import OpenDialog from "../../../components/OpenDialog.jsx";
+import ModalPortal from "../../../components/ModalPortal.jsx";
 
 export const Route = createFileRoute("/projects/$categoryId/backlog")({
   component: Index,
 });
 
 function Index() {
+  const [openTask, setOpenTask] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(5);
   const categoryId = Route.useParams().categoryId;
@@ -42,10 +45,14 @@ function Index() {
         <section className="card-group card-group--wide">
           <ul className="list list--task">
             {tasks.map((task) => (
-              <li key={task.id} className="task">
+              <li
+                key={task.id}
+                className="task"
+                onClick={() => setOpenTask(task)}
+              >
                 <h2 className="task__title task__title--big">{task.Title}</h2>
                 <div className="task__info">
-                <p className="task__description">{task.category?.Title}</p>
+                  <p className="task__description">{task.category?.Title}</p>
                   <div className="task__tags">
                     {task?.tags.map((tag) => (
                       <span key={tag.Title} className="task__tag">
@@ -53,8 +60,7 @@ function Index() {
                       </span>
                     ))}
                   </div>
-                  </div>
-                    <p className="task__description">{task?.Description}</p>
+                </div>
               </li>
             ))}
           </ul>
@@ -83,6 +89,17 @@ function Index() {
           />
         </section>
       </div>
+      {openTask && (
+        <ModalPortal>
+          <div className="dialog-backdrop">
+            <OpenDialog
+              task={openTask}
+              onChangeState={() => {}}
+              onClose={() => setOpenTask(null)}
+            />
+          </div>
+        </ModalPortal>
+      )}
     </>
   );
 }
